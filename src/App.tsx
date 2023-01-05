@@ -1,8 +1,16 @@
 import React from "react";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import * as Pages from "./pages";
 
 function App() {
-  return <div className="App">sdfsfsdfsdfsdfsdfsd</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/dashboard" element={<Pages.Dashboard />} />
+        <Route path="/" element={<Pages.Main />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
