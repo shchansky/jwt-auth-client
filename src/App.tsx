@@ -1,20 +1,27 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useSelector, Provider } from "react-redux";
 import * as Pages from "./pages";
 import * as Components from "./components";
-import { store } from "./store";
-import { Provider } from "react-redux";
+import { store, IRootState } from "./store";
 
 function App() {
+  const isLoggedIn = useSelector(
+    (state: IRootState) => !!state.auth.authData.accessToken
+  );
+
   return (
     <BrowserRouter>
-      <Provider store={store}>
-        <Components.Header />
-        <Routes>
-          <Route path="/dashboard" element={<Pages.Dashboard />} />
-          <Route path="/" element={<Pages.Main />} />
-        </Routes>
-      </Provider>
+      <div>"login: admin, password: admin"</div>
+      <hr />
+      <Components.Header />
+      <Routes>
+        <Route path="/" element={<Pages.Main />} />
+        <Route
+          path="/dashboard"
+          element={isLoggedIn ? <Pages.Dashboard /> : <Navigate to="/" />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }

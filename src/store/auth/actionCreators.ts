@@ -28,3 +28,15 @@ export const loginUser =
       dispatch(loginFailure(e.message));
     }
   };
+
+export const logoutUser =
+  () =>
+  async (dispatch: Dispatch): Promise<void> => {
+    try {
+      await api.auth.logout();
+
+      dispatch(logoutSuccess());
+    } catch (e) {
+      console.error(e);
+    }
+  };
