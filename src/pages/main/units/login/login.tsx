@@ -9,7 +9,6 @@ export const Login = () => {
   const [password, setPassword] = React.useState<string>("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("11111");
     event.preventDefault();
 
     dispatch(loginUser({ login, password }));

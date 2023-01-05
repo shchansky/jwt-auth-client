@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth/authReducer";
-// @ts-ignore
 import { useDispatch } from "react-redux";
+
 import logger from "redux-logger";
 
 export const store = configureStore({
@@ -14,7 +14,6 @@ export const store = configureStore({
     ),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type IRootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-/** Export a hook that can be reused to resolve types */
-export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch; // Export a hook that can be reused to resolve types
