@@ -1,12 +1,18 @@
 import React from "react";
+import { useAppDispatch } from "../../../../store";
+import { loginUser } from "../../../../store/auth/actionCreators";
 
 export const Login = () => {
+  const dispatch = useAppDispatch();
+
   const [login, setLogin] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     console.log("11111");
     event.preventDefault();
+
+    dispatch(loginUser({ login, password }));
   };
 
   return (
