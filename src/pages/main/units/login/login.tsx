@@ -25,13 +25,13 @@ export const Login = () => {
           <label htmlFor="password">Password:</label>
           <input
             name="password"
-            type="text"
+            type="password"
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
           />
         </div>
         <div>
-          <button>Sign In</button>
+          <button>Submit</button>
         </div>
       </form>
     </div>
