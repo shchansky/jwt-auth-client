@@ -12,6 +12,7 @@ import {
 } from "./authReducer";
 import { store } from "..";
 import { AxiosPromise } from "axios";
+import { isTokenExpired } from "../../utils/jwt"
 
 export const loginUser =
   (data: ILoginRequest) =>
@@ -58,18 +59,32 @@ export const getProfile =
     }
   };
 
+// переменная для хранения запроса токена (для избежания race condition)
+let refreshTokenRequest: AxiosPromise<ILoginResponse> | null = null;
+
 export const getAccessToken =
-  () =>
-  (dispatch: Dispatch<any>): string | null => {
-    try {
-      const accessToken = store.getState().auth.authData.accessToken;
+    () =>
+    async (dispatch: Dispatch<any>): Promise<string | null> => {
+        try {
+            const accessToken = store.getState().auth.authData.accessToken
 
-      console.log("accessToken", accessToken);
+            if (!accessToken || isTokenExpired(accessToken)) {
+              if (refreshTokenRequest === null) {
+                  refreshTokenRequest = api.auth.refreshToken()
+              }
 
-      return accessToken;
-    } catch (e) {
-      console.error(e);
+              const res = await refreshTokenRequest
+              refreshTokenRequest = null
 
-      return null;
+              dispatch(loginSucess(res.data.accessToken))
+
+              return res.data.accessToken
+            }
+            
+            return accessToken
+        } catch (e) {
+            console.error(e)
+
+            return null
+        }
     }
-  };

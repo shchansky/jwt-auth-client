@@ -15,23 +15,23 @@ const urlsSkipAuth = [
 
 axiosInstance.interceptors.request.use(async (config) => {
   if (config.url && urlsSkipAuth.includes(config.url)) {
-    return config;
+      return config
   }
 
-  const accessToken = await store.dispatch(getAccessToken());
+  const accessToken = await store.dispatch(getAccessToken())
 
   if (accessToken) {
-    const authorization = `Bearer ${accessToken}`;
+      const autharization = `Bearer ${accessToken}`
 
-    //@ts-ignore
-    config.headers = {
-      ...config.headers,
-      authorization,
-    };
+      //@ts-ignore
+      config.headers = {
+          ...config.headers,
+          authorization: autharization
+      }
   }
 
-  return config;
-});
+  return config
+})
 
 axiosInstance.interceptors.response.use(
   (response) => response,

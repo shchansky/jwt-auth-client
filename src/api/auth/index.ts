@@ -6,6 +6,9 @@ import { ILoginRequest, ILoginResponse } from "./auth.types";
 export const login = (params: ILoginRequest): AxiosPromise<ILoginResponse> =>
   axiosInstance.post(EndPoints.AUTH.LOGIN, params);
 
+export const refreshToken = (): AxiosPromise<ILoginResponse> =>
+  axiosInstance.get(EndPoints.AUTH.REFRESH);
+
 export const logout = (): AxiosPromise =>
   axiosInstance.get(EndPoints.AUTH.LOGOUT);
 
