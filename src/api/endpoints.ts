@@ -7,7 +7,7 @@ const EndPoints = {
     /** Токен выхода */
     LOGOUT: "/logout",
     /** Запрос профиля для проверки работоспособности приложения */
-    PROFILE: "/login",
+    PROFILE: "/profile",
   },
 };
 

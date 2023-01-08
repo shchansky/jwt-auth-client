@@ -22,6 +22,7 @@ export const loginUser =
       const res = await api.auth.login(data);
 
       dispatch(loginSucess(res.data.accessToken));
+      dispatch(getProfile());
     } catch (e: any) {
       console.error(e);
 
@@ -38,5 +39,21 @@ export const logoutUser =
       dispatch(logoutSuccess());
     } catch (e) {
       console.error(e);
+    }
+  };
+
+export const getProfile =
+  () =>
+  async (dispatch: Dispatch<any>): Promise<void> => {
+    try {
+      dispatch(loadProfileStart());
+
+      const res = await api.auth.getProfile();
+
+      dispatch(loadProfileSucess(res.data));
+    } catch (e: any) {
+      console.error(e);
+
+      dispatch(loadProfileFailure(e.message));
     }
   };

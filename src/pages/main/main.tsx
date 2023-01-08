@@ -10,13 +10,19 @@ export const Main = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const profile = useSelector(
+    (state: IRootState) => state.auth.profileData.profile
+  );
+
+  console.log("profile", profile);
+
   const isLoggedIn = useSelector(
     (state: IRootState) => !!state.auth.authData.accessToken
   );
 
   const renderProfile = () => (
     <div>
-      <div>Авторизация прошла успешно</div>
+      <div>Авторизация прошла успешно, {profile}</div>
       <button
         onClick={() => {
           dispatch(logoutUser());
