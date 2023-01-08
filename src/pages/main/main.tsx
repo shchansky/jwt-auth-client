@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Units from "./units";
 import { IRootState, useAppDispatch } from "../../store";
-import { loginStart } from "../../store/auth/authReducer";
 import { logoutUser, getProfile } from "../../store/auth/actionCreators";
 
 export const Main = () => {
