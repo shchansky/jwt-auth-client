@@ -57,3 +57,19 @@ export const getProfile =
       dispatch(loadProfileFailure(e.message));
     }
   };
+
+export const getAccessToken =
+  () =>
+  (dispatch: Dispatch<any>): string | null => {
+    try {
+      const accessToken = store.getState().auth.authData.accessToken;
+
+      console.log("accessToken", accessToken);
+
+      return accessToken;
+    } catch (e) {
+      console.error(e);
+
+      return null;
+    }
+  };

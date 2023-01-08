@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as Units from "./units";
 import { IRootState, useAppDispatch } from "../../store";
 import { loginStart } from "../../store/auth/authReducer";
-import { logoutUser } from "../../store/auth/actionCreators";
+import { logoutUser, getProfile } from "../../store/auth/actionCreators";
 
 export const Main = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +30,14 @@ export const Main = () => {
         }}
       >
         LogOut
+      </button>
+
+      <button
+        onClick={() => {
+          dispatch(getProfile());
+        }}
+      >
+        update Proofile
       </button>
     </div>
   );
